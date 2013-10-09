@@ -3,39 +3,63 @@ class Generate extends CI_Controller {
 
 	
 
-	public function index()
+	public function index($input = "ALLA")
 	{
-		echo "nej. helt enkelt nej.";
+		$text = substr(strtoupper(rawurldecode($input)),0,25);
+		$data['input'] = $text;
+		$this->load->view('start', $data);
 	}
 	
-	public function image($input = "ALLA")
+	public function image($input = "ALLA", $thumb = false)
 	{
-		$max_font_size = 140;
+	
+		$max_font_size = 65;
 		$imageWidth = 731;
 		$imageHeight = 1024;
 		
-		$text = rawurldecode($input);
-		header( "Content-Type: image/png" );
-		header('Content-Disposition: inline; filename="affisch.png";');
+		$text = substr(strtoupper(rawurldecode($input)),0,25);
+		header( "Content-Type: image/jpeg" );
+		header('Content-Disposition: inline; filename="affisch.jpeg";');
 		
 		$im = new Imagick();
 		$draw = new ImagickDraw();
+		
 		$im->readImage('/var/www/dhw132.png');
 		
-		$draw->setFillColor('white');
+		$draw->setFillColor('#f4f8fc');
 		$draw->setFont("/var/www/estile.ttf");
 		$draw->setFontSize( $max_font_size );
+		$draw->setGravity(\Imagick::GRAVITY_CENTER);
+		$draw->setStrokeColor('#000000');
+		$draw->setStrokeAlpha('0.1');
+		$draw->setStrokeWidth(8);
+		$draw->setStrokeAntialias(true);
+		$draw->setTextAntialias(true);
 		
-		$textWidth = $im->queryFontMetrics($draw, $input)["textWidth"];
+		$textWidth = $im->queryFontMetrics($draw, $text)["textWidth"];
 		
-		for ($i = $max_font_size; $textWidth > (900);$i = $i - 2)
+		for ($i = $max_font_size; $textWidth > (650); $i = $i - 1)
 		{ 
 			$draw->setFontSize( $i );
-			$textWidth = $im->queryFontMetrics($draw, $input)["textWidth"];
-			
+			$textWidth = $im->queryFontMetrics($draw, $text)["textWidth"];
 		}
-		$im->annotateImage($draw, (($imageWidth/2) - ($textWidth/4)), 360, -10, $text);
+		
+		$im->annotateImage($draw, -30, -200, -10, $text);
+		$draw->setStrokeAlpha('0');
+		$draw->setStrokeWidth(0);
+		$im->annotateImage($draw, -30, -200, -10, $text);
+		
+		if($thumb) {
+			$im->resizeImage(357, 500, \Imagick::FILTER_CATROM,1);
+		}
+		$im->setCompression(Imagick::COMPRESSION_JPEG); 
+		$im->setCompressionQuality(100); 
+		$im->setImageFormat('jpeg'); 
 		echo $im;
-
+		
+		$draw->clear();
+		$draw->destroy();
+		$im->clear();
+		$im->destroy();
 	}
 }
