@@ -44,10 +44,25 @@ class Generate extends CI_Controller {
 			$textWidth = $im->queryFontMetrics($draw, $text)["textWidth"];
 		}
 		
-		$im->annotateImage($draw, -30, -200, -10, $text);
+		$offsetW = -30;
+		$offsetH = -200;
+		if(strlen($text) > 10) {
+			$offsetW = -10;
+			
+			if(strlen($text) < 15) {
+				$offsetH = -205;
+			}
+			
+			if(strlen($text) > 18) {
+				$offsetH = -195;
+			}
+			
+		}
+		
+		$im->annotateImage($draw, $offsetW, $offsetH, -10, $text);
 		$draw->setStrokeAlpha('0');
 		$draw->setStrokeWidth(0);
-		$im->annotateImage($draw, -30, -200, -10, $text);
+		$im->annotateImage($draw, $offsetW, $offsetH, -10, $text);
 		
 		if($thumb) {
 			$im->resizeImage(357, 500, \Imagick::FILTER_CATROM,1);
