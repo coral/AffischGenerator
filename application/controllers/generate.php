@@ -12,12 +12,12 @@ class Generate extends CI_Controller {
 	
 	public function image($input = "ALLA", $thumb = false)
 	{
-	
+		
 		$max_font_size = 65;
 		$imageWidth = 731;
 		$imageHeight = 1024;
 		
-		$text = substr(strtoupper(rawurldecode($input)),0,25);
+		$text = $this->_wordfilter(substr(strtoupper(rawurldecode($input)),0,25));
 		header( "Content-Type: image/jpeg" );
 		header('Content-Disposition: inline; filename="affisch.jpeg";');
 		
@@ -76,5 +76,43 @@ class Generate extends CI_Controller {
 		$draw->destroy();
 		$im->clear();
 		$im->destroy();
+	}
+	
+	private function _wordfilter($word)
+	{
+		$filter = array(
+			'HITLER' => 'EN TYSK MAN',
+			'STALIN' => 'EN RYSK MAN',
+			'SD' => 'HUSKVARNA BOYZ',
+			'SVERIGEDEMOKRATERNA' => 'HUSKVARNA BOYZ',
+			'CENTERPARTIET' => 'POLITIK PÅ DH? LOL',
+			'FOLKPARTIET' => 'POLITIK PÅ DH? LOL',
+			'KRISTDEMOKRATERNA' => 'POLITIK PÅ DH? LOL',
+			'MILJÖPARTIET' => 'POLITIK PÅ DH? LOL',
+			'MODERATERNA' => 'POLITIK PÅ DH? LOL',
+			'SOCIALDEMOKRATERNA' => 'POLITIK PÅ DH? LOL',
+			'VÄNSTERPARTIET' => 'POLITIK PÅ DH? LOL',
+			'NAZISM' => 'OSKÖNA SNUBBAR',
+			'NAZISTER' => 'OSKÖNA SNUBBAR',
+			'RASISM' => 'OSKÖNA SNUBBAR',
+			'RASISTER' => 'OSKÖNA SNUBBAR',
+			'BREIVIK' => 'EN NORSK GALNING',
+			'LANHOROR' => 'MÄNNISKOR',
+			'HOROR' => 'MÄNNISKOR',
+			'HORA' => 'MÄNNISKOR',
+			'LANHORA' => 'MÄNNISKOR',
+			'LANHOROR' => 'KVINNOR',
+			'GANJA' => 'KONSTGRÄS',
+			'SVECUP' => 'HAHA WAT?',
+			'RASSAR' => 'OSKÖNA SNUBBAR',
+			'JESUS' => 'IMAGINÄR FIGUR',
+			'COCKS' => 'ROW ROW FIGHT THE POWAH',);
+		
+		if(isset($filter[$word])) {
+			return $filter[$word];
+		} else {
+			return $word;	
+		}
+		
 	}
 }
