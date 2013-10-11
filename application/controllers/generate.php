@@ -5,7 +5,7 @@ class Generate extends CI_Controller {
 
 	public function index($input = "ALLA")
 	{
-		$text = substr(strtoupper(rawurldecode($input)),0,25);
+		$text = substr(mb_strtoupper(rawurldecode($input)),0,25);
 		$data['input'] = $text;
 		$this->load->view('start', $data);
 	}
@@ -83,8 +83,8 @@ class Generate extends CI_Controller {
 		$filter = array(
 			'HITLER' => 'EN TYSK MAN',
 			'STALIN' => 'EN RYSK MAN',
-			'SD' => 'HUSKVARNA BOYZ',
-			'SVERIGEDEMOKRATERNA' => 'HUSKVARNA BOYZ',
+			'SD' => 'POLITIK PÅ DH? LOL',
+			'SVERIGEDEMOKRATERNA' => 'POLITIK PÅ DH? LOL',
 			'CENTERPARTIET' => 'POLITIK PÅ DH? LOL',
 			'FOLKPARTIET' => 'POLITIK PÅ DH? LOL',
 			'KRISTDEMOKRATERNA' => 'POLITIK PÅ DH? LOL',
@@ -96,17 +96,14 @@ class Generate extends CI_Controller {
 			'NAZISTER' => 'OSKÖNA SNUBBAR',
 			'RASISM' => 'OSKÖNA SNUBBAR',
 			'RASISTER' => 'OSKÖNA SNUBBAR',
-			'BREIVIK' => 'EN NORSK GALNING',
 			'LANHOROR' => 'MÄNNISKOR',
 			'HOROR' => 'MÄNNISKOR',
 			'HORA' => 'MÄNNISKA',
 			'LANHORA' => 'MÄNNISKOR',
 			'LANHOROR' => 'KVINNOR',
 			'GANJA' => 'KONSTGRÄS',
-			'SVECUP' => 'HAHA WAT?',
-			'RASSAR' => 'OSKÖNA SNUBBAR',
-			'JESUS' => 'EN IMAGINÄR FIGUR',
-			'COCKS' => 'ROW ROW FIGHT THE POWAH',);
+			'STEISJÖ' => 'SUPERSTAR STREAM ADMIN',
+			'RASSAR' => 'OSKÖNA SNUBBAR',);
 		
 		if(isset($filter[$word])) {
 			return $filter[$word];
