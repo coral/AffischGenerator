@@ -99,7 +99,7 @@ class Generate extends CI_Controller {
 			'BREIVIK' => 'EN NORSK GALNING',
 			'LANHOROR' => 'MÄNNISKOR',
 			'HOROR' => 'MÄNNISKOR',
-			'HORA' => 'MÄNNISKOR',
+			'HORA' => 'MÄNNISKA',
 			'LANHORA' => 'MÄNNISKOR',
 			'LANHOROR' => 'KVINNOR',
 			'GANJA' => 'KONSTGRÄS',
