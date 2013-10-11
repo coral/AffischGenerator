@@ -12,7 +12,7 @@ class Generate extends CI_Controller {
 	
 	public function image($input = "ALLA", $thumb = false)
 	{
-		
+
 		$max_font_size = 65;
 		$imageWidth = 731;
 		$imageHeight = 1024;
@@ -24,10 +24,10 @@ class Generate extends CI_Controller {
 		$im = new Imagick();
 		$draw = new ImagickDraw();
 		
-		$im->readImage('/var/www/internal_assets/dhw132.png');
+		$im->readImage('/var/www/generator/internal_assets/dhw132.png');
 		
 		$draw->setFillColor('#f4f8fc');
-		$draw->setFont("/var/www/internal_assets/estile.ttf");
+		$draw->setFont("/var/www/generator/internal_assets/estile.ttf");
 		$draw->setFontSize( $max_font_size );
 		$draw->setGravity(\Imagick::GRAVITY_CENTER);
 		$draw->setStrokeColor('#000000');

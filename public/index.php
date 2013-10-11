@@ -56,7 +56,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = '/var/www/system';
+	$system_path = '/var/www/generator/system';
 
 /*
  *---------------------------------------------------------------
@@ -72,7 +72,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = '/var/www/application';
+	$application_folder = '/var/www/generator/application';
 
 /*
  * --------------------------------------------------------------------
