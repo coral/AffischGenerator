@@ -24,10 +24,10 @@ class Generate extends CI_Controller {
 		$im = new Imagick();
 		$draw = new ImagickDraw();
 		
-		$im->readImage('/var/www/dhw132.png');
+		$im->readImage('/var/www/internal_assets/dhw132.png');
 		
 		$draw->setFillColor('#f4f8fc');
-		$draw->setFont("/var/www/estile.ttf");
+		$draw->setFont("/var/www/internal_assets/estile.ttf");
 		$draw->setFontSize( $max_font_size );
 		$draw->setGravity(\Imagick::GRAVITY_CENTER);
 		$draw->setStrokeColor('#000000');
