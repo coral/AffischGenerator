@@ -115,7 +115,8 @@ class Generate extends CI_Controller {
 			'RASSAR' => 'OSKÖNA SNUBBAR',
 			'WBERG' => 'INTERNET',
 			'NEGER' => 'EN PERSON',
-			'PIRATPARTIET' => 'POLITIK? LOLOLOL');
+			'PIRATPARTIET' => 'POLITIK? LOLOLOL',
+			'KOMMER' => 'HAHA LOL NEJ');
 		
 		if(isset($filter[$word])) {
 			return $filter[$word];
