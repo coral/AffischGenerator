@@ -12,12 +12,21 @@ class Generate extends CI_Controller {
 	
 	public function image($input = "ALLA", $thumb = false)
 	{
-
+		
+		$this->load->database();
 		$max_font_size = 65;
 		$imageWidth = 731;
 		$imageHeight = 1024;
 		
 		$text = $this->_wordfilter(substr(strtoupper(rawurldecode($input)),0,25));
+
+		$data = array(
+   			'data' => $text,
+			'ip' => ip2long($this->input->ip_address())
+		);
+
+		$this->db->insert('generator', $data);
+ 
 		header( "Content-Type: image/jpeg" );
 		header('Content-Disposition: inline; filename="affisch.jpeg";');
 		
@@ -99,11 +108,14 @@ class Generate extends CI_Controller {
 			'LANHOROR' => 'MÄNNISKOR',
 			'HOROR' => 'MÄNNISKOR',
 			'HORA' => 'MÄNNISKA',
-			'LANHORA' => 'MÄNNISKOR',
-			'LANHOROR' => 'KVINNOR',
+			'LANHORA' => 'MÄNNISKA',
+			'LANHOROR' => 'HUMAN BEING',
 			'GANJA' => 'KONSTGRÄS',
 			'STEISJÖ' => 'SUPERSTAR STREAM ADMIN',
-			'RASSAR' => 'OSKÖNA SNUBBAR',);
+			'RASSAR' => 'OSKÖNA SNUBBAR',
+			'WBERG' => 'INTERNET',
+			'NEGER' => 'EN PERSON',
+			'PIRATPARTIET' => 'POLITIK? LOLOLOL');
 		
 		if(isset($filter[$word])) {
 			return $filter[$word];
